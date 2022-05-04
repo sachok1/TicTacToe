@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/restart"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Restart"
+        app:backgroundTint="@android:color/holo_blue_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="158dp" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/restart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/button1.1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:textSize="60dp"
+                app:backgroundTint="#FD229528"
+                app:cornerRadius="15dp" />
+
+            <Button
+                android:id="@+id/button1.2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:textSize="60dp"
+                app:backgroundTint="#FD229528"
+                app:cornerRadius="15dp" />
+
+            <Button
+                android:id="@+id/button1.3"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:textSize="60dp"
+                app:backgroundTint="#FD229528"
+                app:cornerRadius="15dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/button2.1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:textSize="60dp"
+                app:backgroundTint="#FD229528"
+                app:cornerRadius="15dp" />
+
+            <Button
+                android:id="@+id/button2.2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:textSize="60dp"
+                app:backgroundTint="#FD229528"
+                app:cornerRadius="15dp" />
+
+            <Button
+                android:id="@+id/button2.3"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:textSize="60dp"
+                app:backgroundTint="#FD229528"
+                app:cornerRadius="15dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/button3.1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:textSize="60dp"
+                app:backgroundTint="#FD229528"
+                app:cornerRadius="15dp" />
+
+            <Button
+                android:id="@+id/button3.2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:textSize="60dp"
+                app:backgroundTint="#FD229528"
+                app:cornerRadius="15dp" />
+
+            <Button
+                android:id="@+id/button3.3"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:insetTop="0dp"
+                android:textSize="60dp"
+                app:backgroundTint="#FD229528"
+                app:cornerRadius="15dp"
+                android:insetBottom="0dp" />
+        </TableRow>
+
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
