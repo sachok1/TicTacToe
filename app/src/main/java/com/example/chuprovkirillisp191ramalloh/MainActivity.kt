@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         if ((v as Button).text === "") {
             (v as Button).text = player
-            if(player === "X") {
+            if (player === "X") {
                 player = "0"
             }
             else {

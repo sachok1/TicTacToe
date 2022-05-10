@@ -1,5 +1,7 @@
 package com.example.chuprovkirillisp191ramalloh
 
+import kotlin.random.Random
+
 fun main() {
     play(GameImp())
 }
@@ -8,29 +10,40 @@ fun play(game: Game) {
     while (!game.isFinished) {
         render(game.field)
         println("Your turn: ")
-        val input = readLine() ?: error("Can't read line")
-        val points = input.split(" ").map { it.toInt() } // todo validate
-        game.act(points[0], points[1])
+        do {
+            val (row, col) = input()
+        } while (!game.act(row, col))
     }
-    // render
-    // get input
-    // act
-    // render
+    val winnerText = game.winner?.let { "The winner is ${it.toMark()}" } ?: "Tie"
+    println(winnerText)
+}
 
+fun input(): Pair<Int, Int> {
+    val input = readLine() ?: error("Can't read line")
+    val points = input.split(" ").map { it.toInt() } // todo validate
+    return points[0] to points[1]
 }
 
 fun render(field: Field) {
     repeat(field.size) { row ->
         repeat(field.size) { col ->
-
+            print("[ ${field.get(row, col).toMark()} ] ")
         }
+        println()
     }
+}
+
+fun Boolean?.toMark(): String = when(this) {
+    true -> "X"
+    false -> "O"
+    null -> "-"
 }
 
 interface Game {
     val isFinished: Boolean
+    val winner: Boolean?
     val field: Field
-    fun act(row: Int, col: Int)
+    fun act(row: Int, col: Int) : Boolean
 }
 
 interface Field {
@@ -38,18 +51,88 @@ interface Field {
     fun get(row: Int, col: Int): Boolean?
 }
 
-class GameImp : Game {
-    override val isFinished: Boolean = false
-    override val field: Field = ArrayField(3)
+interface MutableField : Field {
+    fun set(row: Int, col: Int, value: Boolean)
+}
 
-    override fun act(row: Int, col: Int) {
+class GameImp : Game {
+
+    override var isFinished: Boolean = false
+    override val winner: Boolean? = null
+    override val field: MutableField = ArrayField(3)
+
+    private val userMark = Random.nextBoolean()
+
+    init {
+        if (!userMark) {
+            actAi()
+        }
+    }
+
+    override fun act(row: Int, col: Int): Boolean {
+        if (field.get(row, col) != null) {
+            return false
+        }
+        field.set(row, col, userMark)
+        checkEnd()
+        if (!isFinished){
+            actAi()
+            checkEnd()
+        }
+        return true
+    }
+
+    private fun checkEnd() {
+        field.forEach { _, _, value ->
+            if (value == null) {
+                return
+            }
+        }
+        isFinished = true
+
+        //...
+        val winnerCombination = mutableListOf<Sequence<Pair<Int, Int>>>().apply {
+            val n = field.size
+            // d 1
+            add(
+                sequence { repeat(n) { yield(it to it) } }
+            )
+            // d 2
+            add(
+                sequence { repeat(n) { yield(it to n - 1 - it) } }
+            )
+            // rows
+            // ...
+            // cols
+        }
+    }
+
+
+    private fun actAi() {
+        field.forEach { row, col, value ->
+            if (value == null) {
+                field.set(row, col, !userMark)
+                return
+            }
+        }
+    }
+}
+
+inline fun Field.forEach(action: (row: Int, col: Int, value: Boolean?) -> Unit) {
+    repeat(size) { row ->
+        repeat(size) { col ->
+            action(row, col, get(row, col))
+        }
 
     }
 }
 
-class ArrayField(override val size: Int) : Field {
+class ArrayField(override val size: Int) : MutableField {
 
     private val points: Array<Array<Boolean?>> = Array(size) { arrayOfNulls(size) }
+    override fun set(row: Int, col: Int, value: Boolean) {
+        points[row][col] = value
+    }
 
     override fun get(row: Int, col: Int): Boolean? = points[row][col]
 }
