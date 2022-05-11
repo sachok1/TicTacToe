@@ -2,42 +2,11 @@ package com.example.chuprovkirillisp191ramalloh
 
 import kotlin.random.Random
 
-fun main() {
-    play(GameImp())
-}
-
-fun play(game: Game) {
-    while (!game.isFinished) {
-        render(game.field)
-        println("Your turn: ")
-        do {
-            val (row, col) = input()
-        } while (!game.act(row, col))
-    }
-    val winnerText = game.winner?.let { "The winner is ${it.toMark()}" } ?: "Tie"
-    println(winnerText)
-}
-
-fun input(): Pair<Int, Int> {
-    val input = readLine() ?: error("Can't read line")
-    val points = input.split(" ").map { it.toInt() } // todo validate
-    return points[0] to points[1]
-}
-
-fun render(field: Field) {
-    repeat(field.size) { row ->
-        repeat(field.size) { col ->
-            print("[ ${field.get(row, col).toMark()} ] ")
-        }
-        println()
-    }
-}
-
-fun Boolean?.toMark(): String = when(this) {
-    true -> "X"
-    false -> "O"
-    null -> "-"
-}
+//fun Boolean?.toMark(): String = when(this) {
+//    true -> "X"
+//    false -> "O"
+//    null -> "-"
+//}
 
 interface Game {
     val isFinished: Boolean

@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import java.lang.reflect.Field
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
+
     private var player = "X"
+    private val game: Game = GameImp()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
